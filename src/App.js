@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './container/login/login';
 import Admin from './container/admin/admin';
+import './config/config';
+import './mock/data';
 /*
 应用的根组件
  */
