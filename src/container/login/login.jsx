@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
-import logo from './images/logo.png';
+import logo from '../../assets/images/logo.png';
 import './login.less';
 import { reqLogin } from '../../api/api';
 import { Redirect } from "react-router-dom";
@@ -18,6 +18,8 @@ class Login extends Component {
                 if(result.code===global.code.SUCCESS_CODE){
                     message.success(result.msg);
                     memoryUtils.user = result.data;
+                    memoryUtils.menu = memoryUtils.user.menu;
+                    storageUtils.saveMenu(memoryUtils.menu);
                     storageUtils.saveUser(result.data);
                     this.props.history.replace("/");
                 }else{

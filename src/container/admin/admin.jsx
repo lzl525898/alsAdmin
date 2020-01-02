@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import memoryUtils from '../../utils/memoryUtils';
-import { Redirect } from "react-router-dom";
+import LeftNav from '../../components/left-nav/left-nav';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
+import {  Route, Switch, Redirect } from 'react-router-dom';
+import { Layout } from 'antd';
+import Home from '../home/home';
+import HomeSetup from '../home-setup/home-setup';
+import SystemSetup from '../syetem-setup/syetem-setup';
+const { Sider, Content } = Layout;
 export default class Admin extends Component {
     render() {
         const user = memoryUtils.user;
@@ -9,9 +17,23 @@ export default class Admin extends Component {
            return <Redirect to='/login'/>
         }
         return(
-            <div>
-                Hello { user.name }
-            </div>
+            <Layout style={{height:'100%'}}>
+                <Sider>
+                    <LeftNav/>
+                </Sider>
+                <Layout>
+                    <Header>Header { user.name }</Header>
+                    <Content>
+                        <Switch>
+                            <Route path='/home' component={Home} />
+                            <Route path='/homeSetup' component={HomeSetup} />
+                            <Route path='/systemSetup' component={SystemSetup}/>
+                            <Redirect to='/home' />
+                        </Switch>
+                    </Content>
+                    <Footer>Footer</Footer>
+                </Layout>
+            </Layout>
         )
     }
 }
