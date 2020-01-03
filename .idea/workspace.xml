@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94c4a0a7-8bfd-4195-819d-5602a0dc269b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/header.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/left-nav/left-nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/left-nav/left-nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/left-nav/left-nav.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/left-nav/left-nav.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/memoryUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/memoryUtils.js" afterDir="false" />
-    </list>
+    <list default="true" id="94c4a0a7-8bfd-4195-819d-5602a0dc269b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -59,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/header/header.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="21" column="63" lean-forward="true" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
+            <state relative-caret-position="250">
+              <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -380,12 +370,12 @@
       <workItem from="1577763630977" duration="11308000" />
       <workItem from="1577839718973" duration="14655000" />
       <workItem from="1577927430335" duration="20861000" />
-      <workItem from="1577966653626" duration="8226000" />
+      <workItem from="1577966653626" duration="8422000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55631000" />
+    <option name="totallyTimeSpent" value="55827000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="74" y="0" width="1729" height="1100" extended-state="0" />
@@ -624,8 +614,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/header/header.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="63" lean-forward="true" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
+        <state relative-caret-position="250">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
