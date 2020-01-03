@@ -6,37 +6,17 @@ import memoryUtils from '../../utils/memoryUtils';
 import logo from '../../assets/images/logo.png';
 const { SubMenu } = Menu;
 class leftNav extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            menu: [],
-            openKeys: [],
-            selectedKeys: []
-        };
-    }
     componentWillMount() {
-        // 得到当前menu列表
-        const menu = memoryUtils.menu;
         // 得到当前路由地址
         const routerPath = this.props.location.pathname;
-        // 得到当前要选中的地址
-        const menuObj = this.getMenuObjByKey(menu,routerPath);
-        console.log("menuObj",menuObj);
-        this.setState({selectedKeys:[routerPath],menu: menu});
-    }
-    /*
-    根据key获取menu对象
-     */
-    getMenuObjByKey = (menu,key) =>{
-        if(menu.children){
-            this.getMenuObjByKey(menu.children, key)
-        }
-        return menu.find(item=>item.key===key)
+        this.selectedKey = routerPath;
+        // 获取菜单节点
+        this.menuNodes = this.getMenuNodes(memoryUtils.menu, routerPath);
     }
     /*
     根据Menu的数据数组生成对应的标签数组
      */
-    getMenuNodes = (menuList)=> {
+    getMenuNodes = (menuList, key)=> {
         return menuList.map(item=>{
             if(!item.children){
                 return (
@@ -48,9 +28,13 @@ class leftNav extends Component{
                     </Menu.Item>
                 )
             } else {
+                const cItem = item.children.find(cItem=>cItem.key===key)
+                if(cItem){ // 存在说明当前item的字列表需要转开
+                    this.openKey = item.key;
+                }
                 return (
                     <SubMenu key={item.key} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>}>
-                        {this.getMenuNodes(item.children)}
+                        {this.getMenuNodes(item.children, key)}
                     </SubMenu>
                 )
             }
@@ -58,7 +42,7 @@ class leftNav extends Component{
     }
 
     render() {
-
+        this.selectedKey = this.props.location.pathname;
         return (
             <div>
                 <Link className='left-nav' to='/'>
@@ -67,8 +51,8 @@ class leftNav extends Component{
                         <div><div>奥松云课堂</div><div>AEP后台</div></div>
                     </header>
                 </Link>
-                <Menu selectedKeys={[this.state.selectedKeys]} mode="inline" theme="dark">
-                    { this.getMenuNodes(this.state.menu) }
+                <Menu selectedKeys={[this.selectedKey]} defaultOpenKeys={[this.openKey]} mode="inline" theme="dark">
+                    { this.menuNodes }
                 </Menu>
             </div>
         )
