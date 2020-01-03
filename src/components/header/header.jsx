@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { message, Breadcrumb } from 'antd';
+import { Modal, Breadcrumb } from 'antd';
 import { withRouter, Link } from 'react-router-dom';
 import LinkButton from '../link-button/link-button';
 import memoryUtils from '../../utils/memoryUtils';
@@ -7,6 +7,7 @@ import storageUtils from '../../utils/storageUtils';
 import { formatDate } from '../../utils/dateUtils';
 import './header.less';
 import { reqWeather } from '../../api/api';
+const { confirm } = Modal;
 
 class Header extends Component {
     constructor(props) {
@@ -64,11 +65,18 @@ class Header extends Component {
         this.breadcrumbArray = this.breadcrumbArray.reverse();
     }
     getBreadcrumbArray = (path) => {
-        const obj = this.getMenuTitle(path==='/' ? '/home' : path);
-        this.breadcrumbArray.push(obj);
-        if(obj.parent){ // 证明还有父级
-            this.getBreadcrumbArray(obj.parent);
+        try{
+            const obj = this.getMenuTitle(path==='/' ? '/home' : path);
+            this.breadcrumbArray.push(obj);
+            if(obj.parent){ // 证明还有父级
+                this.getBreadcrumbArray(obj.parent);
+            }
+        }catch (e) {
+            this.breadcrumbArray = []
+            const obj = this.getMenuTitle('/home');
+            this.breadcrumbArray.push(obj);
         }
+
     }
     getMenuTitle = (path,menu=memoryUtils.menu) => {
         let result;
@@ -87,18 +95,25 @@ class Header extends Component {
         return result;
     }
     logout = ()=>{
-        memoryUtils.clearMemory();
-        storageUtils.clearAllStore();
-        setTimeout(()=>{
-            this.props.history.replace('/login');
-            message.success('退出成功');
-        },200);
+        const that = this;
+        confirm({
+            okText:'确定',
+            cancelText:'取消',
+            content: '确定要退出后台系统吗？',
+            onOk() {
+                setTimeout(()=>{
+                    memoryUtils.clearMemory();
+                    storageUtils.clearAllStore();
+                    that.props.history.replace('/login');
+                },400)
+            }
+        });
     }
     render() {
         return (
             <div className='header'>
                 <div className='header-top'>
-                    欢迎，{ memoryUtils.user.name } <LinkButton style={{marginLeft:'10px'}} onClick={this.logout}>退出</LinkButton>
+                    欢迎，{ memoryUtils.user.name } <LinkButton style={{marginLeft:'6px'}} onClick={this.logout}>退出</LinkButton>
                 </div>
                 <div className='header-bottom'>
                     <div className='header-bottom-left'>

@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-Mock.setup({timeout:'200-500'})
+Mock.setup({timeout:'0-1000'})
 
 // 用户登录
 Mock.mock('/login','post',{
@@ -35,6 +35,11 @@ Mock.mock('/login','post',{
                     title: '系统设置',
                     key: '/systemSetup',
                     icon: 'pie-chart'
+                },{
+                    parent:'/system',
+                    title: '菜单设置',
+                    key: '/menuSetup',
+                    icon: 'pie-chart'
                 }],
             },{
                 title: '用户',
@@ -65,4 +70,74 @@ Mock.mock('/login','post',{
             }
         ]
     }
+})
+// 获取菜单列表
+Mock.mock('/getMenuList', 'post', {
+    code:1,
+    msg: '获取菜单列表成功',
+    data: [
+        {
+            'id': '450000199707208193',
+            'label': '我的课堂',
+            'parent': '0',
+            'path': '/user',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'show':0,
+            'sort':1,
+        },{
+            'id': '120000199506190875',
+            'label': '招生中心',
+            'parent': '0',
+            'path': '/consult',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'show':0,
+            'sort':2,
+            children: [
+                {
+                    'id': '@id',
+                    'label': '咨询管理',
+                    'parent': '120000199506190875',
+                    'path': '/consult',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':0,
+                    'sort':1,
+                },{
+                    'id': '@id',
+                    'label': '招生宣传',
+                    'parent': '120000199506190875',
+                    'path': '/collection',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':0,
+                    'sort':2,
+                }
+            ]
+        },{
+            'id': '990000200505125323',
+            'label': '帮助与反馈',
+            'parent': '0',
+            'path': '/helpfeedback',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'show':0,
+            'sort':3,
+            children: [
+                {
+                    'id': '@id',
+                    'label': '联系我们',
+                    'parent': '990000200505125323',
+                    'path': '/contactUs',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':0,
+                    'sort':1,
+                },{
+                    'id': '@id',
+                    'label': '问题反馈',
+                    'parent': '990000200505125323',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':0,
+                    'sort':2,
+                }
+            ]
+        }
+    ]
 })

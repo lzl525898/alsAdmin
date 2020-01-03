@@ -6,7 +6,7 @@ import memoryUtils from '../../utils/memoryUtils';
 import logo from '../../assets/images/logo.png';
 const { SubMenu } = Menu;
 class leftNav extends Component{
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // 得到当前路由地址
         const routerPath = this.props.location.pathname;
         this.selectedKey = routerPath;
