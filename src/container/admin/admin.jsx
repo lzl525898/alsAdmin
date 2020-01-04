@@ -7,7 +7,9 @@ import {  Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 import Home from '../home/home';
 import HomeSetup from '../home-setup/home-setup';
+import MenuSetup from '../menu-setup/menu-setup';
 import SystemSetup from '../syetem-setup/syetem-setup';
+import './admin.less';
 const { Sider, Content } = Layout;
 export default class Admin extends Component {
     render() {
@@ -23,11 +25,12 @@ export default class Admin extends Component {
                 </Sider>
                 <Layout>
                     <Header>Header { user.name }</Header>
-                    <Content>
+                    <Content className='header-content'>
                         <Switch>
                             <Route path='/home' component={Home} />
                             <Route path='/homeSetup' component={HomeSetup} />
-                            <Route path='/systemSetup' component={SystemSetup}/>
+                            <Route path='/menuSetup' component={MenuSetup} />
+                            <Route path='/systemSetup' component={SystemSetup} />
                             <Redirect to='/home' />
                         </Switch>
                     </Content>
