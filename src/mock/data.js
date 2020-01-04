@@ -71,70 +71,199 @@ Mock.mock('/login','post',{
         ]
     }
 })
-// 获取菜单列表
-Mock.mock('/getMenuList', 'post', {
+// 获取前台菜单列表
+Mock.mock('/getClientMenuList', 'post', {
     code:1,
     msg: '获取菜单列表成功',
     data: [
         {
             'id': '450000199707208193',
+            'key': '@guid',
             'label': '我的课堂',
             'parent': '0',
             'path': '/user',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
-            'show':0,
+            'show':1,
             'sort':1,
         },{
             'id': '120000199506190875',
+            'key': '@guid',
             'label': '招生中心',
             'parent': '0',
             'path': '/consult',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
-            'show':0,
+            'show':1,
             'sort':2,
             children: [
                 {
                     'id': '@id',
+                    'key': '@guid',
                     'label': '咨询管理',
                     'parent': '120000199506190875',
                     'path': '/consult',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
-                    'show':0,
+                    'show':1,
                     'sort':1,
                 },{
                     'id': '@id',
+                    'key': '@guid',
                     'label': '招生宣传',
                     'parent': '120000199506190875',
                     'path': '/collection',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
-                    'show':0,
+                    'show':1,
                     'sort':2,
                 }
             ]
         },{
             'id': '990000200505125323',
+            'key': '@guid',
             'label': '帮助与反馈',
             'parent': '0',
             'path': '/helpfeedback',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
-            'show':0,
+            'show':1,
             'sort':3,
             children: [
                 {
                     'id': '@id',
+                    'key': '@guid',
                     'label': '联系我们',
                     'parent': '990000200505125323',
                     'path': '/contactUs',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
-                    'show':0,
+                    'show':1,
                     'sort':1,
                 },{
                     'id': '@id',
+                    'key': '@guid',
                     'label': '问题反馈',
                     'parent': '990000200505125323',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
                     'show':0,
+                    'sort':2,
+                }
+            ]
+        }
+    ]
+})
+// 获取后台菜单列表
+Mock.mock('/getServerMenuList', 'post', {
+    code:1,
+    msg: '获取菜单列表成功',
+    data: [
+        {
+            'id': '450000199707208194',
+            'key': '@guid',
+            'label': '首页',
+            'parent': '0',
+            'path': '/user',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'show':1,
+            'sort':1,
+        },{
+            'id': '120000199506190876',
+            'key': '@guid',
+            'label': '系统',
+            'parent': '0',
+            'path': '/consult',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'show':1,
+            'sort':2,
+            children: [
+                {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '系统设置',
+                    'parent': '120000199506190876',
+                    'path': '/consult',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':1,
+                },{
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '课程日志',
+                    'parent': '120000199506190876',
+                    'path': '/collection',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':2,
+                }
+            ]
+        },{
+            'id': '990000200505125326',
+            'key': '@guid',
+            'label': '统计',
+            'parent': '0',
+            'path': '/helpfeedback',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'show':1,
+            'sort':3,
+            children: [
+                {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '访问统计',
+                    'parent': '990000200505125326',
+                    'path': '/contactUs',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':1,
+                },{
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '机构统计',
+                    'parent': '990000200505125326',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':0,
+                    'sort':2,
+                }, {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '系统统计',
+                    'parent': '990000200505125326',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':2,
+                }, {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '系统统计1',
+                    'parent': '990000200505125326',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':2,
+                }, {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '系统统计2',
+                    'parent': '990000200505125326',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':2,
+                }, {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '系统统计3',
+                    'parent': '990000200505125326',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
+                    'sort':2,
+                }, {
+                    'id': '@id',
+                    'key': '@guid',
+                    'label': '系统统计4',
+                    'parent': '990000200505125326',
+                    'path': '/feedback',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'show':1,
                     'sort':2,
                 }
             ]
