@@ -3,8 +3,11 @@ import ajax from './ajax';
 import { message } from 'antd';
 // 用户登录
 export const reqLogin = (username, password)=> ajax('/login',{username,password},'POST');
-// 获取菜单列表
-export const reqMenuList = (id)=> ajax('/getMenuList', {id}, 'POST');
+// 获取前台菜单列表
+export const reqCMenuList = (id)=> ajax('/getClientMenuList', {id}, 'POST');
+// 获取后台菜单列表
+export const reqSMenuList = (id)=> ajax('/getServerMenuList', {id}, 'POST');
+
 // 获取天气
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {
