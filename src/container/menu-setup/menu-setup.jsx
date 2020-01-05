@@ -35,15 +35,16 @@ export default class MenuSetup extends Component {
     handleResize = (e)=>{
         this.setState({cardHeight:e.target.innerHeight-OFFSET_HEIGHT});
     }
-    getCMenuList =async (id) =>{
+
+    getCMenuList = async (id) =>{
         this.setState({tableLoading:true})
-       const result = await reqCMenuList(id);
-       if(result.code===global.code.SUCCESS_CODE){
-           const rowKeys = [];
-           result.data.map(item=>rowKeys.push(item.key));
-           this.setState({menuList: result.data,expandedRowKeys: rowKeys});
-       }
-       this.setState({tableLoading:false})
+        const result = await reqCMenuList(id);
+        if(result.code===global.code.SUCCESS_CODE){
+            const rowKeys = [];
+            result.data.map(item=>rowKeys.push(item.key));
+            this.setState({menuList: result.data,expandedRowKeys: rowKeys});
+        }
+        this.setState({tableLoading:false})
     }
 
     getSMenuList = async (id) => {
@@ -64,7 +65,7 @@ export default class MenuSetup extends Component {
         }else{ // 需要关闭 从expandedRowKeys移除
             rowKeys.splice(rowKeys.findIndex(item=>item===record.key),1);
         }
-       this.setState({expandedRowKeys:rowKeys})
+        this.setState({expandedRowKeys:rowKeys})
     }
     handleChangeMenuCategory = (checked)=>{
         this.setState({menuCategory:checked})
@@ -139,13 +140,13 @@ export default class MenuSetup extends Component {
     }
     render() {
         const title = (<div className='menu-setup-title'>
-                            <label>{this.state.menuCategory ? '前台菜单列表' : '后台菜单列表'}</label>
-                            <Switch defaultChecked onChange={this.handleChangeMenuCategory}/>
-                        </div>);
+            <label>{this.state.menuCategory ? '前台菜单列表' : '后台菜单列表'}</label>
+            <Switch defaultChecked onChange={this.handleChangeMenuCategory}/>
+        </div>);
         const extra = (<div>
-                            <Button type='primary'><Icon type='plus'/>添加</Button>
-                            <Button type='danger' style={{marginLeft:'10px'}}><Icon type='delete'/>删除</Button>
-                        </div>);
+            <Button type='primary'><Icon type='plus'/>添加</Button>
+            <Button type='danger' style={{marginLeft:'10px'}}><Icon type='delete'/>删除</Button>
+        </div>);
         const rowSelection = {
             onChange: (selectedRowKeys, selectedRows) => {
                 console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);

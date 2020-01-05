@@ -7,7 +7,8 @@ export const reqLogin = (username, password)=> ajax('/login',{username,password}
 export const reqCMenuList = (id)=> ajax('/getClientMenuList', {id}, 'POST');
 // 获取后台菜单列表
 export const reqSMenuList = (id)=> ajax('/getServerMenuList', {id}, 'POST');
-
+// 获取前台菜单—父子关系
+export const reqCParentMenu = (id)=> ajax('/getClientParentMenu', {id}, 'POST');
 // 获取天气
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

@@ -83,6 +83,8 @@ Mock.mock('/getClientMenuList', 'post', {
             'parent': '0',
             'path': '/user',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoToneappstore',
             'show':1,
             'sort':1,
         },{
@@ -92,25 +94,31 @@ Mock.mock('/getClientMenuList', 'post', {
             'parent': '0',
             'path': '/consult',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoToneappstore',
             'show':1,
             'sort':2,
             children: [
                 {
-                    'id': '@id',
+                    'id': '120000199506190844',
                     'key': '@guid',
                     'label': '咨询管理',
                     'parent': '120000199506190875',
                     'path': '/consult',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':1,
                 },{
-                    'id': '@id',
+                    'id': '120000199506190555',
                     'key': '@guid',
                     'label': '招生宣传',
                     'parent': '120000199506190875',
                     'path': '/collection',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }
@@ -122,25 +130,31 @@ Mock.mock('/getClientMenuList', 'post', {
             'parent': '0',
             'path': '/helpfeedback',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoToneappstore',
             'show':1,
             'sort':3,
             children: [
                 {
-                    'id': '@id',
+                    'id': '120000199505432875',
                     'key': '@guid',
                     'label': '联系我们',
                     'parent': '990000200505125323',
                     'path': '/contactUs',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':1,
                 },{
-                    'id': '@id',
+                    'id': '120000199506190775',
                     'key': '@guid',
                     'label': '问题反馈',
                     'parent': '990000200505125323',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':0,
                     'sort':2,
                 }
@@ -160,6 +174,8 @@ Mock.mock('/getServerMenuList', 'post', {
             'parent': '0',
             'path': '/user',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoToneappstore',
             'show':1,
             'sort':1,
         },{
@@ -169,6 +185,8 @@ Mock.mock('/getServerMenuList', 'post', {
             'parent': '0',
             'path': '/consult',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoToneappstore',
             'show':1,
             'sort':2,
             children: [
@@ -179,6 +197,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '120000199506190876',
                     'path': '/consult',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':1,
                 },{
@@ -188,6 +208,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '120000199506190876',
                     'path': '/collection',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }
@@ -199,6 +221,8 @@ Mock.mock('/getServerMenuList', 'post', {
             'parent': '0',
             'path': '/helpfeedback',
             'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoToneappstore',
             'show':1,
             'sort':3,
             children: [
@@ -209,6 +233,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/contactUs',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':1,
                 },{
@@ -218,6 +244,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':0,
                     'sort':2,
                 }, {
@@ -227,6 +255,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }, {
@@ -236,6 +266,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }, {
@@ -245,6 +277,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }, {
@@ -254,6 +288,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }, {
@@ -263,6 +299,8 @@ Mock.mock('/getServerMenuList', 'post', {
                     'parent': '990000200505125326',
                     'path': '/feedback',
                     'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoToneappstore',
                     'show':1,
                     'sort':2,
                 }
@@ -270,3 +308,34 @@ Mock.mock('/getServerMenuList', 'post', {
         }
     ]
 })
+// 获取前台菜单—父子关系
+Mock.mock('/getClientParentMenu', 'post', {
+    code:1,
+    msg: '登录成功',
+    data: [{
+        label:'作为一级菜单',
+        value:'0',
+    },{
+        label:'我的课堂',
+        value:'450000199707208193',
+    },{
+        label:'招生中心',
+        value:'120000199506190875',
+    },{
+        label:'└─咨询管理',
+        value:'120000199506190844',
+    },{
+        label:'└─招生宣传',
+        value:'120000199506190555',
+    },{
+        label:'帮助与反馈',
+        value:'990000200505125323',
+    },{
+        label:'└─联系我们',
+        value:'120000199505432875',
+    },{
+        label:'└─问题反馈',
+        value:'120000199506190775',
+    }],
+})
+// 获取后台菜单—父子关系
