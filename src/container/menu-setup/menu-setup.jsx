@@ -84,6 +84,61 @@ export default class MenuSetup extends Component {
     addTargetMenu = (row) =>{
         this.setState({addDialogVisible:true, targetMenuObj:row});
     }
+    checkMenusDelete = (data) =>{
+        const parentMenuList = [];
+        const childMenuList = [];
+        if(data && data.length && data.length>0){
+            data.forEach(item=>{
+                if(item.parent==='0'){
+                    parentMenuList.push(item);
+                }else{
+                    childMenuList.push(item);
+                }
+            })
+        }
+        let isDel = true;
+        const baseData = this.state.menuList;
+        parentMenuList.some(parent=>{
+            let parentObj = baseData.find(item=>item.id===parent.id)
+            if(!parentObj.children){
+                let index = baseData.findIndex(i=>i.id===parentObj.id);
+                let memoryMenu = memoryUtils.menuList;
+                memoryMenu.splice(memoryMenu.findIndex(obj=>obj.value===baseData[index].id),1);
+                memoryUtils.menuList = memoryMenu;
+                baseData.splice(index,1);
+            }else{
+                let childMenu = [];
+                parentObj.children.map(child=>childMenu.push(child.id));
+                for(let i=0;i<childMenu.length;i++){
+                    if( childMenuList.findIndex(index=>index.id===childMenu[i])===-1){
+                        isDel = false;
+                        message.error('当前菜单下有子菜单，无法操作');
+                        return true; // 使用array.some() return true时直接返回，不继续执行
+                    }
+                }
+                // 可以删除当前父级菜单及其下所有子菜单
+                let index = baseData.findIndex(i=>i.id===parentObj.id);
+                let memoryMenu = memoryUtils.menuList;
+                memoryMenu.splice(memoryMenu.findIndex(obj=>obj.value===baseData[index].id),1);
+                memoryUtils.menuList = memoryMenu;
+                baseData.splice(index,1);
+            }
+            return 0;
+        })
+        if(isDel){
+            childMenuList.forEach(child=>{
+                let parentId = baseData.findIndex(parent=>parent.id===child.parent);
+                if(baseData[parentId] && baseData[parentId].children){
+                    baseData[parentId].children.splice(baseData[parentId].children.findIndex(item=>item.id===child.id),1);
+                }
+            })
+        }
+        this.setState({menuList:baseData,deleteData:{type:'empty'}});
+    }
+    handleAddMenus = () =>{
+        const menuObj = this.state.targetMenuObj;
+        this.setState({addDialogVisible:true,targetMenuObj:menuObj})
+    }
     handleDelMenus = () =>{
         const that = this;
         if(this.state.deleteData.type==='empty'){
@@ -93,11 +148,11 @@ export default class MenuSetup extends Component {
                 title: '删除菜单',
                 content: '确定要删除所有菜单吗?',
                 onOk() {
-                    that.setState({menuList: []})
+                    that.setState({menuList: [],deleteData:{type:'empty'}})
                 }
             });
         } else if(this.state.deleteData.type==='select'){
-            const baseData = this.state.deleteData.rows;
+            this.checkMenusDelete(this.state.deleteData.rows)
         }
     }
     delTargetMenu = (row) =>{
@@ -112,6 +167,9 @@ export default class MenuSetup extends Component {
                 }
                 const baseData = that.state.menuList;
                 if(row.parent==='0'){// 父级菜单
+                    const memoryMenuList = memoryUtils.menuList;
+                    memoryMenuList.splice(memoryUtils.menuList.findIndex(menu=>menu.value===row.id),1)
+                    memoryUtils.menuList = memoryMenuList;
                     baseData.splice(baseData.findIndex(item=>item.id===row.id),1)
                 }else{
                     let parentIndex = baseData.findIndex(item=>item.id===row.parent);
@@ -131,6 +189,7 @@ export default class MenuSetup extends Component {
             const baseData = this.state.menuList;
             if(obj.parent && obj.parent==='0'){ // 添加到一级菜单
                 baseData.push(obj);
+                memoryUtils.menuList.push({label:obj.label,value:obj.id});
             }else{ // 添加到二级菜单
                 //找到一级菜单
                 let parentIndex = baseData.findIndex(item=>item.id===obj.parent);
@@ -139,7 +198,6 @@ export default class MenuSetup extends Component {
                 }
                 baseData[parentIndex].children.push(obj);
             }
-            memoryUtils.menuList.push({label:obj.label,value:obj.id});
             this.setState({addDialogVisible:visible,menuList:baseData});
         }else{
             this.setState({addDialogVisible:visible});
@@ -262,7 +320,7 @@ export default class MenuSetup extends Component {
             <Switch defaultChecked onChange={this.handleChangeMenuCategory}/>
         </div>);
         const extra = (<div>
-            <Button type='primary'><Icon type='plus'/>添加</Button>
+            <Button type='primary' onClick={this.handleAddMenus}><Icon type='plus'/>添加</Button>
             <Button type='danger' style={{marginLeft:'10px'}} onClick={this.handleDelMenus}><Icon type='delete'/>删除</Button>
         </div>);
         const rowSelection = {
