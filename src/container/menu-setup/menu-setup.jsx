@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
-import { Card, Table, Button, Icon, Switch } from 'antd';
+import { Card, Table, Button, Icon, Switch, message, Modal } from 'antd';
 import { reqCMenuList, reqSMenuList } from '../../api/api';
 import memoryUtils from '../../utils/memoryUtils';
 import windowUtils from '../../utils/windowUtils';
 import EditDialog from './components/edit/edit';
+import AddDialog from './components/add/add';
 import './menu-setup.less';
 
+const { confirm } = Modal;
 const OFFSET_HEIGHT = 160;
 export default class MenuSetup extends Component {
     constructor(props){
         super(props);
-
         this.state = {
+            deleteData:{type:'empty'},
             cardHeight: windowUtils.getClientHeight()-OFFSET_HEIGHT,
             tableLoading:false,
             menuCategory:true, // true 前台菜单  false 后台菜单
             menuList: [],
             expandedRowKeys:[],
             editDialogVisible:false,
+            addDialogVisible:false,
             targetMenuObj:{},
         }
     }
@@ -78,9 +81,112 @@ export default class MenuSetup extends Component {
     editTargetMenu = (row) =>{
         this.setState({editDialogVisible:true, targetMenuObj:row});
     }
+    addTargetMenu = (row) =>{
+        this.setState({addDialogVisible:true, targetMenuObj:row});
+    }
+    handleDelMenus = () =>{
+        const that = this;
+        if(this.state.deleteData.type==='empty'){
+            message.warn('请选择要删除的菜单项');
+        } else if(this.state.deleteData.type==='all'){
+            confirm({
+                title: '删除菜单',
+                content: '确定要删除所有菜单吗?',
+                onOk() {
+                    that.setState({menuList: []})
+                }
+            });
+        } else if(this.state.deleteData.type==='select'){
+            const baseData = this.state.deleteData.rows;
+        }
+    }
+    delTargetMenu = (row) =>{
+        const that = this;
+        confirm({
+            title: '删除菜单',
+            content: `你想删除【${row.label}】这个菜单吗？`,
+            onOk() {
+                if(row.parent==='0' && row.children && row.children.length>0){
+                    message.error('当前菜单下有子菜单，无法操作');
+                    return;
+                }
+                const baseData = that.state.menuList;
+                if(row.parent==='0'){// 父级菜单
+                    baseData.splice(baseData.findIndex(item=>item.id===row.id),1)
+                }else{
+                    let parentIndex = baseData.findIndex(item=>item.id===row.parent);
+                    if(baseData[parentIndex].children){
+                        baseData[parentIndex].children.splice(baseData[parentIndex].children.findIndex(item=>item.id===row.id),1)
+                        if(baseData[parentIndex].children.length===0){
+                            baseData[parentIndex].children = null
+                        }
+                    }
+                }
+                that.setState({menuList:baseData})
+            }
+        });
+    }
+    addMenuWithList = (visible, obj)=> {
+        if(obj && obj.path){
+            const baseData = this.state.menuList;
+            if(obj.parent && obj.parent==='0'){ // 添加到一级菜单
+                baseData.push(obj);
+            }else{ // 添加到二级菜单
+                //找到一级菜单
+                let parentIndex = baseData.findIndex(item=>item.id===obj.parent);
+                if(!baseData[parentIndex].children){
+                    baseData[parentIndex].children = []
+                }
+                baseData[parentIndex].children.push(obj);
+            }
+            memoryUtils.menuList.push({label:obj.label,value:obj.id});
+            this.setState({addDialogVisible:visible,menuList:baseData});
+        }else{
+            this.setState({addDialogVisible:visible});
+        }
+    }
     editTargetMenuData = (visible,obj)=> {
         if(obj && obj.path){
-            this.setState({editDialogVisible:visible, targetMenuObj:obj});
+            let index;
+            const baseData = this.state.menuList;
+            const {id,parent,oldParent} = obj;
+            if(oldParent==='0'){ // 原来是一级菜单
+                index = this.state.menuList.findIndex(item=>item.id===id);
+                if(this.state.menuList[index] && this.state.menuList[index].children && this.state.menuList[index].children.length>0){
+                    message.error('当前菜单下有子菜单，无法操作');
+                    this.setState({editDialogVisible:visible});
+                    return
+                }
+                if(parent==='0'){ // 编辑后为一级菜单
+                    baseData[index] = obj;
+                }else{ // 编辑后变更为二级菜单
+                    // 将数据插入到二级菜单中
+                    let parentIndex = this.state.menuList.findIndex(item=>item.id===parent);
+                    if(!baseData[parentIndex].children){
+                        baseData[parentIndex].children = [];
+                    }
+                    baseData[parentIndex].children.push(obj);
+                    // 删除原数据
+                    baseData.splice(index,1)
+                }
+            }else{ // 原来二级菜单
+                let parentIndex = this.state.menuList.findIndex(item=>item.id===oldParent);
+                index = this.state.menuList[parentIndex].children.findIndex(item=>item.id===id);
+                // 删除原来数据
+                baseData[parentIndex].children.splice(index,1)
+                if(parent==='0') { // 编辑后为一级菜单
+                    // 将数据插入到一级菜单中
+                    baseData.push(obj);
+                }else{ // 编辑后变更为二级菜单
+                   let targetParentIndex = baseData.findIndex(item=>item.id===parent);
+                   if(!baseData[targetParentIndex].children){
+                       baseData[targetParentIndex].children = []
+                   }
+                    baseData[targetParentIndex].children.push(obj)
+
+                }
+            }
+            this.setState({editDialogVisible:visible,menuList:baseData});
         }else{
             this.setState({editDialogVisible:visible});
         }
@@ -90,7 +196,7 @@ export default class MenuSetup extends Component {
         return [
             {
                 title: '菜单名称',
-                dataIndex: 'label',
+                dataIndex:'label',
                 key: 'label',
             },
             {
@@ -99,6 +205,18 @@ export default class MenuSetup extends Component {
                 key: 'path',
             },
             {
+                title: '图标',
+                width: 80,
+                key: 'icon',
+                render: (row)=>{
+                    return row.icon
+                        ?
+                        <Icon type={row.icon.split('_')[1]} theme={row.icon.split('_')[0]}/>
+                        :
+                        null
+                }
+            },
+           {
                 title: '创建时间',
                 dataIndex: 'date',
                 width: 230,
@@ -130,9 +248,9 @@ export default class MenuSetup extends Component {
                 width: 240,
                 render: (row) => (
                     <div style={{display:'flex',justifyContent:'center'}}>
-                        <Button type="primary" size='small' ghost style={{marginRight:'8px'}}>添加子菜单</Button>
+                        <Button type="primary" size='small' ghost style={{marginRight:'8px'}} onClick={()=>{this.addTargetMenu(row)}} disabled={row.parent!=='0'}>添加子菜单</Button>
                         <Button type="primary" size='small' ghost style={{marginRight:'8px'}} onClick={()=>{this.editTargetMenu(row)}}>编辑</Button>
-                        <Button type="danger" size='small' ghost>删除</Button>
+                        <Button type="danger" size='small' ghost onClick={()=>{this.delTargetMenu(row)}}>删除</Button>
                     </div>
                 )
             },
@@ -145,17 +263,17 @@ export default class MenuSetup extends Component {
         </div>);
         const extra = (<div>
             <Button type='primary'><Icon type='plus'/>添加</Button>
-            <Button type='danger' style={{marginLeft:'10px'}}><Icon type='delete'/>删除</Button>
+            <Button type='danger' style={{marginLeft:'10px'}} onClick={this.handleDelMenus}><Icon type='delete'/>删除</Button>
         </div>);
         const rowSelection = {
-            onChange: (selectedRowKeys, selectedRows) => {
-                console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-            },
+            // onChange: (selectedRowKeys, selectedRows) => {
+            //     console.log("onChange",`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            // },
             onSelect: (record, selected, selectedRows) => {
-                console.log(record, selected, selectedRows);
+                this.setState({deleteData:{type:'select',rows:selectedRows}})
             },
             onSelectAll: (selected, selectedRows, changeRows) => {
-                console.log(selected, selectedRows, changeRows);
+                this.setState({deleteData:{type:'all'}})
             },
         }
         const paginationProps = {
@@ -174,6 +292,8 @@ export default class MenuSetup extends Component {
                 </Card>
                 <EditDialog visible={this.state.editDialogVisible} menuObj={this.state.targetMenuObj}
                             handleMenuFunc={this.editTargetMenuData.bind(this)} category={this.state.menuCategory}/>
+                <AddDialog visible={this.state.addDialogVisible} parent={this.state.targetMenuObj.parent}
+                           handleMenuFunc={this.addMenuWithList.bind(this)} category={this.state.menuCategory}/>
             </div>
         )
     }

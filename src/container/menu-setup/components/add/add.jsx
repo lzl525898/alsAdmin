@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { Modal, Icon, Select, Radio, Slider, Form, Input } from 'antd';
-import { reqCParentMenu } from "../../../../api/api";
+import {Form, Icon, Input, Modal, Radio, Select, Slider} from 'antd';
+import {reqCParentMenu, addMenuItem} from "../../../../api/api";
+import {formatDate} from "../../../../utils/dateUtils";
 import memoryUtils from "../../../../utils/memoryUtils";
-import { formatDate } from "../../../../utils/dateUtils";
+
 const Item = Form.Item;
 const ICON_DATA = [{
     category: '线框风格',
@@ -15,8 +15,8 @@ const ICON_DATA = [{
     category: '实底风格',
     theme:'filled',
     icons: [{type:'account-book'},{type:'appstore'},{type:'bank'},{type:'book'},{type:'calculator'},{type:'calendar'},{type:'carry-out'}
-    ,{type:'codepen-square'},{type:'contacts'},{type:'container'},{type:'control'},{type:'credit-card'},{type:'dashboard'},{type:'database'}
-    ,{type:'shop'},{type:'shopping'},{type:'switcher'},{type:'tablet'},{type:'wallet'},{type:'video-camera'},{type:'usb'}]
+        ,{type:'codepen-square'},{type:'contacts'},{type:'container'},{type:'control'},{type:'credit-card'},{type:'dashboard'},{type:'database'}
+        ,{type:'shop'},{type:'shopping'},{type:'switcher'},{type:'tablet'},{type:'wallet'},{type:'video-camera'},{type:'usb'}]
 },{
     category: '双色风格',
     theme: 'twoTone',
@@ -24,20 +24,19 @@ const ICON_DATA = [{
         ,{type:'contacts'},{type:'container'},{type:'control'},{type:'credit-card'},{type:'dashboard'},{type:'database'},{type:'file'}
         ,{type:'schedule'},{type:'gold'},{type:'setting'}, {type:'shop'},{type:'shopping'},{type:'switcher'},{type:'tablet'},{type:'wallet'}]
 }]
-class EditDialog extends Component {
+class AddDialog extends Component {
     constructor(props){
         super(props);
         this.state = {
+            addTmpMenu:null,
             parentMenuList:[],
-            confirmLoading:false
+            confirmLoading:false,
         }
     }
     componentDidMount() {
-        if(memoryUtils.user && memoryUtils.user.userId){
-            this.userId = memoryUtils.user.userId;
-            this.getCParentMenu(this.userId);
-        }
+        this.getCParentMenu();
     }
+
     getCParentMenu = async (id) =>{
         const result = await reqCParentMenu(id);
         if(result.code===global.code.SUCCESS_CODE){
@@ -45,29 +44,24 @@ class EditDialog extends Component {
             this.setState({parentMenuList:result.data})
         }
     }
-    handleOk = ()=>{
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.setState({confirmLoading:true});
-                setTimeout(()=>{
-                    this.setState({confirmLoading:false});
-                    this.props.handleMenuFunc(false, this.genEditMenuObj(values));
-                },500)
-            }
-            this.props.form.resetFields();
-        });
+    addMenuHandle = async (values) =>{
+        const result = await addMenuItem(values.parent);
+        if(result.code===global.code.SUCCESS_CODE){
+            this.setState({addTmpMenu:result.data},()=>{
+                this.setState({confirmLoading:false});
+                const obj = this.genAddMenuObj(values);
+                const {id,key} = this.state.addTmpMenu;
+                obj.id = id;
+                obj.key = key;
+                this.props.handleMenuFunc(false, obj);
+            })
+        }
     }
-    handleCancel = ()=>{
-        this.props.form.resetFields();
-        this.props.handleMenuFunc(false);
-    }
-    genEditMenuObj = (values) => {
-        const {id,key,parent} = this.props.menuObj;
+    genAddMenuObj = (values) => {
+        const parent = this.props.parent;
         const {menuName, menuParent, menuPath, menuParams, menuIcon, menuSort, hidden} = values;
         const obj = {
             icon:menuIcon,
-            id:id,
-            key:key,
             date: formatDate(Date.now()),
             label:menuName,
             params:menuParams,
@@ -79,35 +73,48 @@ class EditDialog extends Component {
         }
         return obj
     }
+    handleOk = ()=>{
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                this.setState({confirmLoading:true});
+                this.addMenuHandle(values);
+            }
+            this.props.form.resetFields();
+        });
+    }
+    handleCancel = ()=>{
+        this.props.form.resetFields();
+        this.props.handleMenuFunc(false);
+    }
     getIconNodes = ()=>{
-       return (
-           <Select placeholder='请选择菜单图标'>
-               {
-                   (ICON_DATA.length===0)
-                   ? null
-                   :ICON_DATA.map((itemGroup,indexGroup)=>{
-                        return (
-                            <Select.OptGroup label={itemGroup.category} key={indexGroup}>
-                                {
-                                    (itemGroup.icons.length===0)
-                                    ? null
-                                    : itemGroup.icons.map((item,index)=>{
-                                        return (
-                                            <Select.Option value={itemGroup.theme + '_' + item.type} key={index}><Icon type={item.type} key={index} theme={itemGroup.theme} /> {item.type}</Select.Option>
-                                        )
-                                    })
-                                }
-                            </Select.OptGroup>
-                        )
-                   })
-               }
-           </Select>
-       )
+        return (
+            <Select placeholder='请选择菜单图标'>
+                {
+                    (ICON_DATA.length===0)
+                        ? null
+                        :ICON_DATA.map((itemGroup,indexGroup)=>{
+                            return (
+                                <Select.OptGroup label={itemGroup.category} key={indexGroup}>
+                                    {
+                                        (itemGroup.icons.length===0)
+                                            ? null
+                                            : itemGroup.icons.map((item,index)=>{
+                                                return (
+                                                    <Select.Option value={itemGroup.theme + '_' + item.type} key={index}><Icon type={item.type} key={index} theme={itemGroup.theme} /> {item.type}</Select.Option>
+                                                )
+                                            })
+                                    }
+                                </Select.OptGroup>
+                            )
+                        })
+                }
+            </Select>
+        )
     }
     render() {
         const { visible, category } = this.props;
         const { getFieldDecorator } = this.props.form;
-        const title = category ? '编辑前台菜单' : '编辑后台菜单';
+        const title = category ? '添加前台菜单' : '添加后台菜单';
         this.parentNode = this.state.parentMenuList.length===0
             ?
             null
@@ -138,7 +145,6 @@ class EditDialog extends Component {
                 { label: '隐藏', value: 0 },
             ];
             this.iconSelectNode = this.iconSelectNode ? this.iconSelectNode : this.getIconNodes();
-            let path = this.props.menuObj.path ? (this.props.menuObj.path.split('?')[0]) : ''
             return (
                 <Modal
                     title={title}
@@ -150,54 +156,48 @@ class EditDialog extends Component {
                     <Form {...formItemLayout}>
                         <Item label='上级菜单'>
                             {getFieldDecorator('menuParent',{
-                                initialValue:this.props.menuObj.parent
+                                initialValue:'0',
+                                rules:[{ required: true, message: '上级菜单不能为空'}]
                             })(this.parentNode)}
                         </Item>
                         <Item label='菜单名称'>
                             {getFieldDecorator('menuName',{
-                                initialValue:this.props.menuObj.label,
+                                initialValue:'',
                                 rules:[{ required: true, message: '菜单名称不能为空'}]
                             })(<Input placeholder='请输入菜单名称'/>)}
                         </Item>
                         <Item label='菜单路径'>
                             {getFieldDecorator('menuPath',{
-                                initialValue:path,
+                                initialValue:'',
                                 rules:[{ required: true, message: '菜单路径不能为空'}]
                             })(<Input placeholder='请输入菜单路径'/>)}
                         </Item>
                         <Item label='地址参数'>
                             {getFieldDecorator('menuParams',{
-                                initialValue:this.props.menuObj.params,rules:[]
+                                initialValue:'',rules:[]
                             })(<Input placeholder='例id=3&type=add'/>)}
                         </Item>
                         <Item label='菜单图标'>
                             {getFieldDecorator('menuIcon',{
-                                initialValue:this.props.menuObj.icon})(this.iconSelectNode)}
+                                initialValue:''})(this.iconSelectNode)}
                         </Item>
                         <Item label='菜单排序'>
                             {getFieldDecorator('menuSort',{
-                                initialValue:this.props.menuObj.sort})(<Slider
+                                initialValue:0})(<Slider
                                 marks={{0: '0',20: '20',40: '40',
                                     60: '60',80: '80',100: '100',}}/>)}
                         </Item>
                         <Item label='是否隐藏'>
                             {getFieldDecorator('hidden',{
-                                initialValue:this.props.menuObj.show*1})(<Radio.Group options={radioOptions}/>)}
+                                initialValue:1})(<Radio.Group options={radioOptions}/>)}
                         </Item>
                     </Form>
                 </Modal>
             )
         }else{
-            return null
+            return null;
         }
     }
 }
 
-EditDialog.propTypes = {
-    menuObj: PropTypes.object.isRequired,
-    visible: PropTypes.bool.isRequired,
-    category: PropTypes.bool.isRequired,
-    handleMenuFunc: PropTypes.func.isRequired,
-}
-
-export default Form.create()(EditDialog)
+export default Form.create()(AddDialog);
