@@ -67,6 +67,16 @@ Mock.mock('/login','post',{
                         icon: 'pie-chart'
                     }],
                 }],
+            },{
+                title: '课程',
+                key: '/course',
+                icon: 'mail',
+                children: [{
+                    parent:'/course',
+                    title: '课程管理',
+                    key: '/courses',
+                    icon: 'pie-chart'
+                }]
             }
         ]
     }
@@ -130,6 +140,133 @@ Mock.mock('/getClientMenuList', 'post', {
                     'show':1,
                     'sort':2,
                 }
+            ]
+        },{
+            'id': '120000199506199999',
+            'key': '@guid',
+            'label': '教务中心',
+            'parent': '0',
+            'path': '/teacher',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoTone_appstore',
+            'show':1,
+            'sort':2,
+            children: [
+                {
+                    'id': '220000199506190844',
+                    'key': '@guid',
+                    'label': '学生管理',
+                    'parent': '120000199506199999',
+                    'path': '/studyMan',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':1,
+                },{
+                    'id': '230000199506190555',
+                    'key': '@guid',
+                    'label': '班级管理',
+                    'parent': '120000199506199999',
+                    'path': '/classMan',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':2,
+                },{
+                    'id': '240000199506190844',
+                    'key': '@guid',
+                    'label': '排课管理',
+                    'parent': '120000199506199999',
+                    'path': '/calendar',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':3,
+                },{
+                    'id': '250000199506190555',
+                    'key': '@guid',
+                    'label': '记上课',
+                    'parent': '120000199506199999',
+                    'path': '/classRecord',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':4,
+                },{
+                    'id': '240025199506190844',
+                    'key': '@guid',
+                    'label': '任务管理',
+                    'parent': '120000199506199999',
+                    'path': '/taskMan',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':5,
+                },{
+                    'id': '250034199506190555',
+                    'key': '@guid',
+                    'label': '学情报告',
+                    'parent': '120000199506199999',
+                    'path': '/report',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':6,
+                }
+            ]
+        },{
+            'id': '990000202222125323',
+            'key': '@guid',
+            'label': '考试中心',
+            'parent': '0',
+            'path': '/exam',
+            'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+            'params':'',
+            'icon':'twoTone_appstore',
+            'show':1,
+            'sort':3,
+            children: [
+                {
+                'id': '220000199506111111',
+                'key': '@guid',
+                'label': '考试信息管理',
+                'parent': '990000202222125323',
+                'path': '/examManage',
+                'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                'params':'',
+                'icon':'twoTone_appstore',
+                'show':1,
+                'sort':1,
+                 },{
+                    'id': '220000199506111111',
+                    'key': '@guid',
+                    'label': '成绩查询',
+                    'parent': '990000202222125323',
+                    'path': '/examResult',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':2,
+                },{
+                    'id': '220000199506111111',
+                    'key': '@guid',
+                    'label': '分析考试',
+                    'parent': '990000202222125323',
+                    'path': '/analysisExam',
+                    'date':"@datetime('yyyy-MM-dd HH:mm:ss')",
+                    'params':'',
+                    'icon':'twoTone_appstore',
+                    'show':1,
+                    'sort':3,
+                },
             ]
         },{
             'id': '990000200505125323',
@@ -326,6 +463,12 @@ Mock.mock('/getClientParentMenu', 'post', {
     },{
         label:'我的课堂',
         value:'450000199707208193',
+    },{
+        label:'教务中心',
+        value:'120000199506199999',
+    },{
+        label:'考试中心',
+        value:'990000202222125323',
     },{
         label:'招生中心',
         value:'120000199506190875',

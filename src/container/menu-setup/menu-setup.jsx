@@ -24,12 +24,10 @@ export default class MenuSetup extends Component {
             targetMenuObj:{},
         }
     }
-    UNSAFE_componentWillMount() {
-        window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
-        this.columns = this.initTableColumns();
-    }
 
     componentDidMount() {
+        window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
+        this.columns = this.initTableColumns();
         if(memoryUtils.user && memoryUtils.user.userId){
             this.userId = memoryUtils.user.userId;
             this.getCMenuList(this.userId);
@@ -343,10 +341,9 @@ export default class MenuSetup extends Component {
         return (
             <div style={{height:this.state.cardHeight}}>
                 <Card className='menu-setup' style={{height:this.state.cardHeight}} title={title} extra={extra}>
-                    <Table bordered loading={this.state.tableLoading} pagination={paginationProps}
-                           expandedRowKeys={this.state.expandedRowKeys} rowSelection={rowSelection}
-                           onExpand={(expanded, record)=>{this.handleExpandedRow(expanded,record)}}
-                           dataSource={this.state.menuList} columns={this.columns}/>
+                    <Table bordered loading={this.state.tableLoading} rowSelection={rowSelection} pagination={paginationProps}
+                           expandedRowKeys={this.state.expandedRowKeys} dataSource={this.state.menuList} columns={this.columns}
+                           onExpand={(expanded, record)=>{this.handleExpandedRow(expanded,record)}} scroll={{y:this.state.cardHeight-220}}/>
                 </Card>
                 <EditDialog visible={this.state.editDialogVisible} menuObj={this.state.targetMenuObj}
                             handleMenuFunc={this.editTargetMenuData.bind(this)} category={this.state.menuCategory}/>

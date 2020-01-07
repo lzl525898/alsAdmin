@@ -9,6 +9,7 @@ import Home from '../home/home';
 import HomeSetup from '../home-setup/home-setup';
 import MenuSetup from '../menu-setup/menu-setup';
 import SystemSetup from '../syetem-setup/syetem-setup';
+import Courses from '../courses/courses';
 import './admin.less';
 const { Sider, Content } = Layout;
 export default class Admin extends Component {
@@ -31,6 +32,7 @@ export default class Admin extends Component {
                             <Route path='/homeSetup' component={HomeSetup} />
                             <Route path='/menuSetup' component={MenuSetup} />
                             <Route path='/systemSetup' component={SystemSetup} />
+                            <Route path='/courses' component={Courses} />
                             <Redirect to='/home' />
                         </Switch>
                     </Content>
