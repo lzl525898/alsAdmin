@@ -11,6 +11,8 @@ export const reqSMenuList = (id)=> ajax('/getServerMenuList', {id}, 'POST');
 export const reqCParentMenu = (id)=> ajax('/getClientParentMenu', {id}, 'POST');
 // 添加菜单项
 export const addMenuItem = (id)=> ajax('/addMenuItem',{id},'POST');
+// 获取课程列表
+export const getCoursesList = ({id, keywords, category}) => ajax('/getCourseList',{id, keywords, category}, 'POST');
 // 获取天气
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

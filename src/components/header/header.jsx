@@ -61,7 +61,14 @@ class Header extends Component {
     }
     getBreadcrumbList = () =>{
         this.breadcrumbArray = [];
-        this.getBreadcrumbArray(this.props.location.pathname);
+        let targetPathName = '';
+        const pathArray = this.props.location.pathname.split('/');
+        if(pathArray && pathArray.length>1){
+            targetPathName = '/' + pathArray[1];// 当有二级路由的子路由时屏蔽掉
+        }else{
+            targetPathName = this.props.location.pathname;
+        }
+        this.getBreadcrumbArray(targetPathName);
         this.breadcrumbArray = this.breadcrumbArray.reverse();
     }
     getBreadcrumbArray = (path) => {

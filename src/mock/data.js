@@ -478,3 +478,23 @@ Mock.mock('/getClientParentMenu', 'post', {
     }],
 })
 // 获取后台菜单—父子关系
+// 获取课程列表
+Mock.mock('/getCourseList', 'post',{
+    code:1,
+    msg: '获取课程列表成功',
+    'data|20-100': [{
+        id:'@increment',
+        'name|1-3':'@ctitle',
+        'title|1-3':'@ctitle',
+        image: "@dataImage('125x125','#4A7BF7','Random')",
+        category: '@integer(0, 2)', // 1.产品介绍 2.模型创作 3.Scratch
+        date: '@date("yyyy-MM-dd")',
+        sort: '@integer(1, 100)',
+        status: '@integer(0, 1)',
+        aids: '@integer(0,3)', // 教具 0未选择 1百变之星套件 2奥宝大颗粒积木 3克鲁斯编程车
+        software: '@integer(0,3)', // 软件 0未选择 1Scratch3.0 2Micro:bit 3Arduino
+        school: '@integer(0,3)', // 学校 0未选择 1奥松智能 2编码星球
+        culture: '@integer(0,3)', // 培养对象 0未选择 1 3岁—6岁 2 6岁—10岁 3 10岁—18岁
+        'desc|10-20':'@ctitle', // 课程简介
+    }]
+})

@@ -28,7 +28,14 @@ class leftNav extends Component{
                     </Menu.Item>
                 )
             } else {
-                const cItem = item.children.find(cItem=>cItem.key===key)
+                let targetKey = '';
+                const keyArray = key.split('/');
+                if(keyArray && keyArray.length>1){ // 当有二级路由的子路由时屏蔽掉
+                    targetKey = '/'+keyArray[1];
+                }else{
+                    targetKey = key;
+                }
+                const cItem = item.children.find(cItem=>cItem.key===targetKey)
                 if(cItem){ // 存在说明当前item的字列表需要转开
                     this.openKey = item.key;
                 }
