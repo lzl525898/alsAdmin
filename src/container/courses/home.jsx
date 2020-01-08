@@ -90,7 +90,7 @@ class CourseHome extends Component {
             },{
                 title: '课程类别',
                 key: 'category',
-                width: 300,
+                width: 200,
                 render: (row)=> {
                     return row.category===0 ? <Tag color="blue">{COURSE_CATEGORY[0]}</Tag> : (row.category===1 ? <Tag color="geekblue">{COURSE_CATEGORY[1]}</Tag>:<Tag color="purple">{COURSE_CATEGORY[2]}</Tag>)
                 }
