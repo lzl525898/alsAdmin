@@ -12,7 +12,19 @@ export const reqCParentMenu = (id)=> ajax('/getClientParentMenu', {id}, 'POST');
 // 添加菜单项
 export const addMenuItem = (id)=> ajax('/addMenuItem',{id},'POST');
 // 获取课程列表
-export const getCoursesList = ({id, keywords, category}) => ajax('/getCourseList',{id, keywords, category}, 'POST');
+export const getCoursesList = ({id, keywords, category}) => ajax('/getCourseList',{id, keywords, category}, 'POST');  //  data {id, [keywords]:category}
+// 获取课程分类
+export const getCourseCategory = ()=> ajax('/getCourseCategory',{},'POST');
+// 获取课程教具
+export const getCourseAids = ()=> ajax('/getCourseAids',{},'POST');
+// 获取课程软件
+export const getCourseSoftware = ()=> ajax('/getCourseSoftware',{},'POST');
+// 获取学校列表
+export const getCourseSchool = ()=> ajax('/getCourseSchool',{},'POST');
+// 获取课程培养对象
+export const getCourseCulture = ()=> ajax('/getCourseCulture',{},'POST');
+// 更新课程详情
+export const updateCourse = ()=> ajax('/updateCourse', {}, 'POST');
 // 获取天气
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

@@ -51,7 +51,7 @@ class leftNav extends Component{
     render() {
         const pathArray = this.props.location.pathname.split('/');
         if(pathArray && pathArray.length>1){
-            this.selectedKey = pathArray[1];
+            this.selectedKey = "/" + pathArray[1];
         }else{
             this.selectedKey = this.props.location.pathname;
         }

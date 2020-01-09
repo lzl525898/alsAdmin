@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-Mock.setup({timeout:'0-1000'})
+Mock.setup({timeout:'50-500'})
 
 // 用户登录
 Mock.mock('/login','post',{
@@ -40,32 +40,6 @@ Mock.mock('/login','post',{
                     title: '菜单设置',
                     key: '/menuSetup',
                     icon: 'pie-chart'
-                }],
-            },{
-                title: '用户',
-                key: '/user',
-                icon: 'mail',
-                children: [{
-                    parent:'/user',
-                    title: '管理员',
-                    key: '/userAdmin',
-                    icon: 'pie-chart'
-                },{
-                    parent:'/user',
-                    title: '用户组管理',
-                    key: '/userGroup',
-                    icon: 'pie-chart',
-                    children: [{
-                        parent:'/userGroup',
-                        title: '身份管理',
-                        key: '/roleManage',
-                        icon: 'pie-chart'
-                    },{
-                        parent:'/userGroup',
-                        title: '权限管理',
-                        key: '/authManage',
-                        icon: 'pie-chart'
-                    }],
                 }],
             },{
                 title: '课程',
@@ -487,14 +461,94 @@ Mock.mock('/getCourseList', 'post',{
         'name|1-3':'@ctitle',
         'title|1-3':'@ctitle',
         image: "@dataImage('125x125','#4A7BF7','Random')",
-        category: '@integer(0, 2)', // 1.产品介绍 2.模型创作 3.Scratch
+        category: '@integer(0, 2)', // 0.产品介绍 1.模型创作 2.Scratch
         date: '@date("yyyy-MM-dd")',
         sort: '@integer(1, 100)',
         status: '@integer(0, 1)',
         aids: '@integer(0,3)', // 教具 0未选择 1百变之星套件 2奥宝大颗粒积木 3克鲁斯编程车
         software: '@integer(0,3)', // 软件 0未选择 1Scratch3.0 2Micro:bit 3Arduino
-        school: '@integer(0,3)', // 学校 0未选择 1奥松智能 2编码星球
+        school: '@integer(0,2)', // 学校 0未选择 1奥松智能 2编码星球
         culture: '@integer(0,3)', // 培养对象 0未选择 1 3岁—6岁 2 6岁—10岁 3 10岁—18岁
         'desc|10-20':'@ctitle', // 课程简介
     }]
+})
+// 获取课程分类
+Mock.mock('/getCourseCategory', 'post', {
+    code:1,
+    msg:'成功',
+    data: [{
+        id: 1,
+        name: '产品介绍',
+    },{
+        id: 2,
+        name: '模型创作',
+    },{
+        id: 3,
+        name: 'Scratch',
+    }]
+})
+// 获取课程教具
+Mock.mock('/getCourseAids', 'post', {
+    code:1,
+    msg:'成功',
+    data: [{
+        id: 1,
+        name: '百变之星套件',
+    },{
+        id: 2,
+        name: '奥宝大颗粒积木',
+    },{
+        id: 3,
+        name: '克鲁斯编程车',
+    }]
+})
+// 获取课程软件
+Mock.mock('/getCourseSoftware', 'post', {
+    code:1,
+    msg:'成功',
+    data: [{
+        id: 1,
+        name: 'Scratch3.0',
+    },{
+        id: 2,
+        name: 'Micro:bit',
+    },{
+        id: 3,
+        name: 'Arduino',
+    }]
+})
+// 获取学校列表
+Mock.mock('/getCourseSchool', 'post', {
+    code:1,
+    msg:'成功',
+    data: [{
+        id: 1,
+        name: '奥松智能',
+    },{
+        id: 2,
+        name: '编码星球',
+    },{
+        id: 3,
+        name: '极客海码',
+    }]
+})
+// 获取课程培养对象
+Mock.mock('/getCourseCulture', 'post', {
+    code:1,
+    msg:'成功',
+    data: [{
+        id: 1,
+        name: '3岁—6岁',
+    },{
+        id: 2,
+        name: '6岁—10岁',
+    },{
+        id: 3,
+        name: '10岁—18岁',
+    }]
+})
+// 更新课程信息
+Mock.mock('/updateCourse', 'post', {
+    code: 1,
+    msg: '成功'
 })

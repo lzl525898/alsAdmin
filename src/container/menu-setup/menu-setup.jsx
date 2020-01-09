@@ -26,13 +26,17 @@ export default class MenuSetup extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
+        window.addEventListener('resize', this.handleResize.bind(this)); //监听窗口大小改变
         this.columns = this.initTableColumns();
         if(memoryUtils.user && memoryUtils.user.userId){
             this.userId = memoryUtils.user.userId;
             this.getCMenuList(this.userId);
         }
     }
+    componentWillUnmount() {
+        window.removeEventListener('resize',function(event){event.preventDefault()},false);
+    }
+
     handleResize = (e)=>{
         this.setState({cardHeight:e.target.innerHeight-OFFSET_HEIGHT});
     }
@@ -338,17 +342,25 @@ export default class MenuSetup extends Component {
             showQuickJumper:true,
             showTotal:(total)=>`共 ${total} 条`
         }
+        const tableLoading = this.state.tableLoading ? this.state.tableLoading : false;
+        const cardHeight = this.state.cardHeight ? this.state.cardHeight : 0;
+        const visible = this.state.editDialogVisible ? this.state.editDialogVisible : false;
+        const targetMenuObj = this.state.targetMenuObj ? this.state.targetMenuObj : {parent:''};
+        const menuCategory = this.state.menuCategory ? this.state.menuCategory : 0;
+        const addDialogVisible = this.state.addDialogVisible ? this.state.addDialogVisible : false;
+        const expandedRowKeys = this.state.expandedRowKeys ? this.state.expandedRowKeys : [];
+        const menuList = this.state.menuList ? this.state.menuList : [];
         return (
-            <div style={{height:this.state.cardHeight}}>
-                <Card className='menu-setup' style={{height:this.state.cardHeight}} title={title} extra={extra}>
-                    <Table bordered loading={this.state.tableLoading} rowSelection={rowSelection} pagination={paginationProps}
-                           expandedRowKeys={this.state.expandedRowKeys} dataSource={this.state.menuList} columns={this.columns}
-                           onExpand={(expanded, record)=>{this.handleExpandedRow(expanded,record)}} scroll={{y:this.state.cardHeight-220}}/>
+            <div style={{height:cardHeight}}>
+                <Card className='menu-setup' style={{height:cardHeight}} title={title} extra={extra}>
+                    <Table bordered loading={tableLoading} rowSelection={rowSelection} pagination={paginationProps}
+                           expandedRowKeys={expandedRowKeys} dataSource={menuList} columns={this.columns}
+                           onExpand={(expanded, record)=>{this.handleExpandedRow(expanded,record)}} scroll={{y:cardHeight-220}}/>
                 </Card>
-                <EditDialog visible={this.state.editDialogVisible} menuObj={this.state.targetMenuObj}
-                            handleMenuFunc={this.editTargetMenuData.bind(this)} category={this.state.menuCategory}/>
-                <AddDialog visible={this.state.addDialogVisible} parent={this.state.targetMenuObj.parent}
-                           handleMenuFunc={this.addMenuWithList.bind(this)} category={this.state.menuCategory}/>
+                <EditDialog visible={visible} menuObj={targetMenuObj}
+                            handleMenuFunc={this.editTargetMenuData.bind(this)} category={menuCategory}/>
+                <AddDialog visible={addDialogVisible} parent={targetMenuObj.parent}
+                           handleMenuFunc={this.addMenuWithList.bind(this)} category={menuCategory}/>
             </div>
         )
     }

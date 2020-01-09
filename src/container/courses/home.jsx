@@ -4,7 +4,14 @@ import { withRouter } from 'react-router-dom';
 import windowUtils from "../../utils/windowUtils";
 import memoryUtils from "../../utils/memoryUtils";
 import LinkButton from "../../components/link-button/link-button";
-import { getCoursesList } from "../../api/api";
+import {
+    getCoursesList,
+    getCourseCategory, // 获取课程分类
+    getCourseAids, // 获取课程教具
+    getCourseSoftware, // 获取课程软件
+    getCourseSchool, // 获取学校列表
+    getCourseCulture // 获取课程培养对象
+} from "../../api/api";
 
 const { Option } = Select;
 const OFFSET_HEIGHT = 160;
@@ -13,25 +20,48 @@ class CourseHome extends Component {
     constructor(props){
         super(props);
         this.state = {
+            listBaseData: '',
             tableDataSource: [],
             tableColumn: this.initTableColumns(),
             cardHeight: windowUtils.getClientHeight()-OFFSET_HEIGHT,
             searchLoading:false,
             courseCategory: 0,
             courseKeywords:'',
+            currentPage:1,
             tableLoading: false,
         }
     }
     componentDidMount() {
         const {courseCategory,courseKeywords} = this.state;
+        this.initComponentData();
         this.getCourses(courseCategory,courseKeywords);
         window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
+    }
+    initComponentData = async ()=>{
+        const initData = {category:[],aids:[],software:[],school:[],culture:[]};
+        const results = await Promise.all([getCourseCategory(),getCourseAids(),getCourseSoftware(),getCourseSchool(),getCourseCulture()]);
+        results.forEach((item,index)=>{
+            if(item.code===global.code.SUCCESS_CODE){
+                if(index===0){
+                    initData.category = item.data;
+                }else if(index===1){
+                    initData.aids = item.data;
+                }else if(index===2){
+                    initData.software = item.data;
+                }else if(index===3){
+                    initData.school = item.data;
+                }else if(index===4){
+                    initData.culture = item.data;
+                }
+            }
+            this.setState({listBaseData:initData});
+        })
     }
     getCourses = async(category, keywords)=>{
         this.setState({tableLoading:true});
         const result = await getCoursesList({id:memoryUtils.user.userId,keywords:keywords,category:category });
         if(result.code===global.code.SUCCESS_CODE){
-            this.setState({tableDataSource: result.data,tableLoading:false,courseKeywords:'',searchLoading:false});
+            this.setState({tableDataSource: result.data,tableLoading:false,courseKeywords:'',searchLoading:false,currentPage:1});
         }
     }
     handleResize = (e)=>{
@@ -78,7 +108,7 @@ class CourseHome extends Component {
     }
     getCardExtra = ()=> {
         return (
-            <Button type='primary' icon="plus">添加课程</Button>
+            <Button type='primary' icon="plus" onClick={()=>{this.props.history.push({pathname:'/courses/add'})}}>添加课程</Button>
         )
     }
     initTableColumns = ()=>{
@@ -134,16 +164,20 @@ class CourseHome extends Component {
         ];
     }
     handleTableEdit = (row)=>{
-        this.props.history.push({pathname:'/courses/edit',state: {data:row,type:'edit'}})
+        this.props.history.push({pathname:'/courses/edit',state: {data:row,type:'edit',initBaseData:this.state.listBaseData}})
     }
     handleTableDetail = (row)=>{
-        this.props.history.push({pathname:'/courses/detail',state: {data:row,type:'detail'}})
+        this.props.history.push({pathname:'/courses/detail',state: {data:row,type:'detail',initBaseData:this.state.listBaseData}})
     }
     render() {
         const pagination = {
+            current: this.state.currentPage,
             hideOnSinglePage:true,
             showQuickJumper:true,
-            showTotal:(total)=>`共 ${total} 条`
+            showTotal:(total)=>`共 ${total} 条`,
+            onChange: (page)=>{
+                this.setState({currentPage:page});
+            }
         }
         return (
             <div className='course-home'>
