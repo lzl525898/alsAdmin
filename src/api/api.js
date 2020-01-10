@@ -25,6 +25,8 @@ export const getCourseSchool = ()=> ajax('/getCourseSchool',{},'POST');
 export const getCourseCulture = ()=> ajax('/getCourseCulture',{},'POST');
 // 更新课程详情
 export const updateCourse = ()=> ajax('/updateCourse', {}, 'POST');
+// 添加课程
+export const addCourse = ()=> ajax('/addCourse', {}, 'POST');
 // 获取天气
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

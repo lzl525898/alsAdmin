@@ -108,7 +108,7 @@ class CourseHome extends Component {
     }
     getCardExtra = ()=> {
         return (
-            <Button type='primary' icon="plus" onClick={()=>{this.props.history.push({pathname:'/courses/add'})}}>添加课程</Button>
+            <Button type='primary' icon="plus" onClick={()=>{this.props.history.push({pathname:'/courses/add',state:{initBaseData:this.state.listBaseData}})}}>添加课程</Button>
         )
     }
     initTableColumns = ()=>{

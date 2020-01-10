@@ -3,6 +3,7 @@ import { Card, Icon, List, Input, Select, Upload, Slider, Button, message } from
 import { Redirect } from 'react-router-dom';
 import LinkButton from '../../components/link-button/link-button';
 import windowUtils from "../../utils/windowUtils";
+import stringUtils from '../../utils/stringUtils';
 import {
     updateCourse, // 修改课程内容
 } from '../../api/api';
@@ -54,6 +55,19 @@ export default class EditCourse extends Component {
         }
     }
     updateCourseData = async ()=>{
+        const { name, title, desc } = this.state.data;
+        if(stringUtils.isEmpty(name)){
+            message.error('请完善课程信息')
+            return;
+        }
+        if(stringUtils.isEmpty(title)){
+            message.error('请完善课程信息')
+            return;
+        }
+        if(stringUtils.isEmpty(desc)){
+            message.error('请完善课程信息')
+            return;
+        }
         this.setState({updateLoading:true});
         const result = await updateCourse();
         if(result.code===global.code.SUCCESS_CODE){
@@ -120,6 +134,10 @@ export default class EditCourse extends Component {
         baseData.desc = e.currentTarget.value;
         this.setState({data:baseData});
     }
+    beforeUpload = (file)=>{
+        console.log(file);
+        return true;
+    }
     render() {
         const {redirect} = this.state;
         const headerContent = this.state.type==='detail' ? '课程详情' : '编辑课程';
@@ -157,7 +175,7 @@ export default class EditCourse extends Component {
                         <List.Item>
                             <div className='course-home-card-list-item'>
                                 <div className='course-home-card-list-item-title'>{data.category.label}:</div>
-                                <Select style={{flex:1,marginLeft:'20px'}} value={this.state.data.category===0 ? '请选择类别' : this.state.data.category} onChange={(val)=>{this.handleChangeCategory(val)}} disabled={this.state.type==='detail'}>
+                                <Select style={{flex:1,marginLeft:'20px'}} value={this.state.data.category} onChange={(val)=>{this.handleChangeCategory(val)}} disabled={this.state.type==='detail'}>
                                     {
                                         this.state.listBaseData.category.length===0
                                         ?
@@ -259,6 +277,7 @@ export default class EditCourse extends Component {
                                         listType="picture-card"
                                         showUploadList={false}
                                         disabled={this.state.type==='detail'}
+                                        beforeUpload={file=>this.beforeUpload(file)}
                                         action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
                                         {data.image.content ? <img src={data.image.content} alt="avatar" style={{ width:'100%'}} /> : uploadButton}
                                     </Upload>

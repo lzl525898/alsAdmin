@@ -477,13 +477,13 @@ Mock.mock('/getCourseCategory', 'post', {
     code:1,
     msg:'成功',
     data: [{
-        id: 1,
+        id: 0,
         name: '产品介绍',
     },{
-        id: 2,
+        id: 1,
         name: '模型创作',
     },{
-        id: 3,
+        id: 2,
         name: 'Scratch',
     }]
 })
@@ -551,4 +551,9 @@ Mock.mock('/getCourseCulture', 'post', {
 Mock.mock('/updateCourse', 'post', {
     code: 1,
     msg: '成功'
+})
+// 添加课程信息
+Mock.mock('/addCourse', 'post', {
+    code: 1,
+    msg: '课程添加成功'
 })

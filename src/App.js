@@ -5,6 +5,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import Login from './container/login/login';
 import Admin from './container/admin/admin';
 import './config/config';
+// 模拟数据
 import './mock/data';
 /*
 应用的根组件

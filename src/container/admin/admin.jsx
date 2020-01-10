@@ -36,7 +36,7 @@ export default class Admin extends Component {
                             <Redirect to='/home' />
                         </Switch>
                     </Content>
-                    <Footer>Footer</Footer>
+                    <Footer/>
                 </Layout>
             </Layout>
         )
