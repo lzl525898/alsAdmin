@@ -20,6 +20,7 @@ class CourseHome extends Component {
     constructor(props){
         super(props);
         this.state = {
+            addBtnDisable:true,
             listBaseData: '',
             tableDataSource: [],
             tableColumn: this.initTableColumns(),
@@ -54,7 +55,7 @@ class CourseHome extends Component {
                     initData.culture = item.data;
                 }
             }
-            this.setState({listBaseData:initData});
+            this.setState({listBaseData:initData,addBtnDisable:false});
         })
     }
     getCourses = async(category, keywords)=>{
@@ -108,7 +109,7 @@ class CourseHome extends Component {
     }
     getCardExtra = ()=> {
         return (
-            <Button type='primary' icon="plus" onClick={()=>{this.props.history.push({pathname:'/courses/add',state:{initBaseData:this.state.listBaseData}})}}>添加课程</Button>
+            <Button type='primary' icon="plus" onClick={()=>{this.props.history.push({pathname:'/courses/add',state:{initBaseData:this.state.listBaseData}})}} disabled={this.state.addBtnDisable}>添加课程</Button>
         )
     }
     initTableColumns = ()=>{

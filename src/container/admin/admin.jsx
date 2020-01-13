@@ -6,9 +6,9 @@ import Footer from '../../components/footer/footer';
 import {  Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 import Home from '../home/home';
-import HomeSetup from '../home-setup/home-setup';
+import RoleManage from '../role-manage/role-manage';
 import MenuSetup from '../menu-setup/menu-setup';
-import SystemSetup from '../syetem-setup/syetem-setup';
+import UserManage from '../user-manage/user-manage';
 import Courses from '../courses/courses';
 import './admin.less';
 const { Sider, Content } = Layout;
@@ -20,7 +20,7 @@ export default class Admin extends Component {
            return <Redirect to='/login'/>
         }
         return(
-            <Layout style={{height:'100%',minHeight:'1060px'}}>
+            <Layout style={{minHeight:'100%'}}>
                 <Sider>
                     <LeftNav/>
                 </Sider>
@@ -29,9 +29,9 @@ export default class Admin extends Component {
                     <Content className='header-content'>
                         <Switch>
                             <Route path='/home' component={Home} />
-                            <Route path='/homeSetup' component={HomeSetup} />
+                            <Route path='/roleManage' component={RoleManage} />
                             <Route path='/menuSetup' component={MenuSetup} />
-                            <Route path='/systemSetup' component={SystemSetup} />
+                            <Route path='/userManage' component={UserManage} />
                             <Route path='/courses' component={Courses} />
                             <Redirect to='/home' />
                         </Switch>

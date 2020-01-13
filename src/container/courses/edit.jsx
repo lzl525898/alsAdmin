@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Card, Icon, List, Input, Select, Upload, Slider, Button, message } from 'antd';
 import { Redirect } from 'react-router-dom';
 import LinkButton from '../../components/link-button/link-button';
+import RichTextEditor from '../../components/rich-text-editor/rich-text-editor';
 import windowUtils from "../../utils/windowUtils";
 import stringUtils from '../../utils/stringUtils';
 import {
@@ -14,6 +15,7 @@ const OFFSET_HEIGHT = 160;
 export default class EditCourse extends Component {
     constructor(props){
         super(props);
+        this.rte = React.createRef();
         if(this.props.location && this.props.location.state && this.props.location.state.type){
             this.state = {
                 cardHeight: windowUtils.getClientHeight()-OFFSET_HEIGHT,
@@ -69,6 +71,7 @@ export default class EditCourse extends Component {
             return;
         }
         this.setState({updateLoading:true});
+        console.log("richTextEditor",this.rte.current.getDetail())
         const result = await updateCourse();
         if(result.code===global.code.SUCCESS_CODE){
             message.success('课程修改成功');
@@ -155,7 +158,7 @@ export default class EditCourse extends Component {
             <Redirect to='/courses'/>
             :
             <div className='course-home'>
-                <Card title={this.getCardTitle()} className='course-home-card' style={{height:this.state.cardHeight}}>
+                <Card title={this.getCardTitle()} className='course-home-card' style={{minHeight:this.state.cardHeight}}>
                     <List
                         bordered
                         header={<div style={{fontSize:'16px',fontWeight:'bold'}}>{headerContent}</div>}
@@ -266,6 +269,12 @@ export default class EditCourse extends Component {
                                     style={{flex:1,marginLeft:'20px'}} autoSize={{ minRows: 2, maxRows: 6 }} disabled={this.state.type==='detail'}
                                     value={this.state.data.desc} onChange={(e)=>{this.handleChangeDesc(e)}} placeholder="请输入课程介绍"
                                 />
+                            </div>
+                        </List.Item>
+                        <List.Item>
+                            <div className='course-home-card-list-item' style={{width:'100%'}}>
+                                <div className='course-home-card-list-item-title'>课程详情:</div>
+                                <RichTextEditor detail={''} ref={this.rte}/>
                             </div>
                         </List.Item>
                         <List.Item>

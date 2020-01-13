@@ -27,20 +27,18 @@ Mock.mock('/login','post',{
                 icon: 'mail',
                 children: [{
                     parent:'/system',
-                    title: '首页设置',
-                    key: '/homeSetup',
-                    icon: 'pie-chart'
-                },{
-                    parent:'/system',
-                    title: '系统设置',
-                    key: '/systemSetup',
-                    icon: 'pie-chart'
-                },{
-                    parent:'/system',
                     title: '菜单设置',
                     key: '/menuSetup',
                     icon: 'pie-chart'
                 }],
+            },{
+                title: '用户管理',
+                key: '/userManage',
+                icon: 'pie-chart',
+            },{
+                title: '角色管理',
+                key: '/roleManage',
+                icon: 'pie-chart',
             },{
                 title: '课程',
                 key: '/course',

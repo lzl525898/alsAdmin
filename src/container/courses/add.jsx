@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import {Card, Icon, Form, Input, Select, Slider, Upload, Button, message} from "antd";
+import {Card, Icon, Form, Input, Select, Slider, Upload, Button, message } from "antd";
 import { withRouter } from 'react-router-dom';
 import LinkButton from "../../components/link-button/link-button";
-import windowUtils from "../../utils/windowUtils";
 import { addCourse } from '../../api/api';
+import RichTextEditor from '../../components/rich-text-editor/rich-text-editor';
 
 const { TextArea } = Input;
 class AddCourse extends Component {
     constructor(props){
         super(props);
+        this.rte = React.createRef();
         if(this.props.location && this.props.location.state && this.props.location.state.initBaseData){
             this.state = {
                 tmpImage:'',
@@ -37,6 +38,7 @@ class AddCourse extends Component {
     }
     handleSubmit = (e)=>{
         e.preventDefault();
+        console.log("richTextEditor", this.rte.current.getDetail())
         this.props.form.validateFields( async (err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
@@ -66,7 +68,7 @@ class AddCourse extends Component {
             </div>
         );
         return (
-            <div className='course-home' style={{overflow:'auto'}}>
+            <div className='course-home' style={{minHeight:'100%'}}>
                 <Card title={this.getCardTitle()} className='course-home-card'>
                     <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                         <Form.Item label="课程名称">
@@ -181,6 +183,11 @@ class AddCourse extends Component {
                                     <TextArea autoSize={{ minRows: 2, maxRows: 6 }} placeholder="请输入课程介绍"/>
                                 )
                             }
+                        </Form.Item>
+                        <Form.Item label='课程详情'>
+                            <div style={{marginLeft:'-20px'}}>
+                                <RichTextEditor detail={''} ref={this.rte}/>
+                            </div>
                         </Form.Item>
                         <Form.Item label="课程封面">
                             {

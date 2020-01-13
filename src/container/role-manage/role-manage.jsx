@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-export default class homeSetup extends Component {
+export default class RoleManage extends Component {
     render() {
         return (
-            <div>homeSetup</div>
+            <div>RoleManage</div>
         )
     }
 }
