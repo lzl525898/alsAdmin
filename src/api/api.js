@@ -27,6 +27,12 @@ export const getCourseCulture = ()=> ajax('/getCourseCulture',{},'POST');
 export const updateCourse = ()=> ajax('/updateCourse', {}, 'POST');
 // 添加课程
 export const addCourse = ()=> ajax('/addCourse', {}, 'POST');
+// 获取角色列表
+export const getRoleList = ()=> ajax('/getRoleList', {}, 'POST');
+// 添加新角色
+export const addNewRole = ()=> ajax('/addNewRole', {}, 'POST');
+// 编辑角色
+export const editRole = ()=> ajax('/editRole', {}, 'POST');
 // 获取天气
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

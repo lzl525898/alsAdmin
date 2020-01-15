@@ -555,3 +555,36 @@ Mock.mock('/addCourse', 'post', {
     code: 1,
     msg: '课程添加成功'
 })
+// 获取角色管理列表
+Mock.mock('/getRoleList', 'post', {
+    code: 1,
+    msg: '角色列表获取成功',
+    data: [
+        {
+            id:1,
+            label:'超级管理员',
+            desc:'拥有网站最高管理员权限',
+            date:'@datetime("yyyy-MM-dd HH:mm:ss")'
+        },{
+            id:2,
+            label:'机构管理员',
+            desc:'拥有机构最高管理员权限',
+            date:'@datetime("yyyy-MM-dd HH:mm:ss")'
+        },{
+            id:3,
+            label:'课程管理员',
+            desc:'拥有课程模块所有管理员权限',
+            date:'@datetime("yyyy-MM-dd HH:mm:ss")'
+        }
+    ]
+})
+// 添加新角色
+Mock.mock('/addNewRole', 'post', {
+    code: 1,
+    msg: '添加新角色成功',
+})
+// 编辑角色信息
+Mock.mock('/editRole', 'post', {
+    code: 1,
+    msg: '编辑角色成功',
+})
