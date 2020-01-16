@@ -38,7 +38,6 @@ export default class AuthTree extends Component {
                     ]
                 }
             ],
-            expandedKeys:[],
             checkedKeys:[],
         };
     }
@@ -51,14 +50,10 @@ export default class AuthTree extends Component {
     }
 
     onCheck = checkedKeys => {
-        console.log('onCheck', checkedKeys);
-        this.setState({ checkedKeys });
+        this.authTreeData[this.props.uid].checkedKeys = checkedKeys;
+        console.log()
     };
 
-    onSelect = (selectedKeys, info) => {
-        console.log('onSelect', info);
-        this.setState({ selectedKeys });
-    };
     renderTreeNodes = data =>{
         return data.reduce((pre,item) => {
             pre.push(<TreeNode title={item.title} key={item.key} >
@@ -71,17 +66,12 @@ export default class AuthTree extends Component {
     }
     render() {
         this.authTreeData = this.props.authTree;
-        const expandedKeys = this.getAuthTreeByUser(this.props.uid).expandedKeys;
         const checkedKeys = this.getAuthTreeByUser(this.props.uid).checkedKeys;
-        console.log("this.props.uid",this.props.uid)
-        console.log("expandedKeys",expandedKeys)
-        console.log("checkedKeys",checkedKeys)
         return (
             <Tree
                 checkable
-                expandedKeys={expandedKeys}
+                defaultExpandAll={true}
                 checkedKeys={checkedKeys}
-                onSelect={this.onSelect}
                 onCheck={this.onCheck}
             >
                 <TreeNode title="平台权限" key="all">

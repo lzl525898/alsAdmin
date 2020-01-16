@@ -223,6 +223,7 @@ export default class RoleManage extends Component {
             showQuickJumper:true,
             showTotal:(total)=>`共 ${total} 条`
         };
+        const authTree = this.authTreeData;
         return (
             <div style={{height:'100%'}}>
                 <Card className='menu-setup' style={{height:'100%'}} title={title}>
@@ -256,7 +257,7 @@ export default class RoleManage extends Component {
                     onOk={this.authHandleOk.bind(this)}
                     onCancel={this.authHandleCancel.bind(this)}
                 >
-                    <AuthTree ref={this.authTree} uid={this.state.targetRow.id} authTree={this.authTreeData}/>
+                    <AuthTree ref={this.authTree} uid={this.state.targetRow.id} authTree={authTree}/>
                 </Modal>
             </div>
         )
