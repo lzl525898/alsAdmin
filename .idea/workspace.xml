@@ -2,67 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d51a994-8e79-44e7-ba53-1650743151d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Counter.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/App.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reduce/action-types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reduce/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reduce/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reduce/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_app/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_count_redux/App.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_count_redux/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_count_redux/reduce/action-types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_count_redux/reduce/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_count_redux/reduce/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src_count_redux/reduce/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/admin.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/api/ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/api/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/assets/images/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/footer/footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/footer/footer.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/header/header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/header.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/header/header.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/left-nav/left-nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/left-nav/left-nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/left-nav/left-nav.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/left-nav/left-nav.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/link-button/link-button.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/link-button/link-button.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/link-button/link-button.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/link-button/link-button.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/rich-text-editor/rich-text-editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/components/rich-text-editor/rich-text-editor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/config/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/admin/admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/admin/admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/admin/admin.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/admin/admin.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/courses/add.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/courses/add.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/courses/courses.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/courses/courses.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/courses/courses.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/courses/courses.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/courses/edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/courses/edit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/courses/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/courses/home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/home/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/home/home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/home/home.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/home/home.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/login/login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/login/login.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/login/login.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/menu-setup/components/add/add.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/menu-setup/components/add/add.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/menu-setup/components/edit/edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/menu-setup/components/edit/edit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/menu-setup/menu-setup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/menu-setup/menu-setup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/menu-setup/menu-setup.less" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/menu-setup/menu-setup.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/role-manage/add-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/role-manage/add-form.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/role-manage/auth-tree.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/role-manage/auth-tree.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/role-manage/edit-form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/role-manage/edit-form.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/role-manage/role-manage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/role-manage/role-manage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/user-manage/user-manage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/container/user-manage/user-manage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mock/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/mock/data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/dateUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/utils/dateUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/memoryUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/utils/memoryUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/storageUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/utils/storageUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/stringUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/utils/stringUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/windowUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src_app/utils/windowUtils.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1580267453277</updated>
       <workItem from="1580267461474" duration="4746000" />
-      <workItem from="1580352311806" duration="11663000" />
+      <workItem from="1580352311806" duration="12215000" />
     </task>
     <servers />
   </component>
