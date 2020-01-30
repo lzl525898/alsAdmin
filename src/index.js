@@ -3,12 +3,12 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import storageUtils from './utils/storageUtils';
-import memoryUtils from './utils/memoryUtils';
+import App from './containers/App';
+import store from './reduce/store';
+import {Provider} from 'react-redux'
 
-const user = storageUtils.getUser();
-memoryUtils.user = user;
-memoryUtils.menu = user.menu;
-// 将App组件标签渲染到index页面的div上
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root'));
